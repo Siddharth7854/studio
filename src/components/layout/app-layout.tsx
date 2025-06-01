@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect } from 'react';
@@ -6,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import Navbar from '@/components/layout/navbar';
 import { SidebarProvider, Sidebar, SidebarInset, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '@/components/ui/sidebar';
-import { LayoutDashboard, CalendarPlus, Bell, UserPlus, ClipboardList } from 'lucide-react';
+import { LayoutDashboard, CalendarPlus, Bell, UserPlus, ClipboardList, Settings, UserCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -29,14 +28,13 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       <div className="flex h-screen items-center justify-center bg-background">
         <div className="flex flex-col items-center">
           <Image 
-            src="https://placehold.co/64x64.png" 
-            alt="CLMS BUIDCO Logo" 
+            src="/ChatGPT Image Apr 29, 2025, 12_41_29 PM.png"
+            alt="BUIDCO Logo" 
             width={64} 
-            height={64} 
-            className="animate-pulse"
-            data-ai-hint="logo buidco" 
+            height={64}
+            className="animate-pulse object-contain"
           />
-          <p className="mt-4 text-lg font-medium text-foreground">Loading CLMS BUIDCO...</p>
+          <p className="mt-4 text-lg font-medium text-foreground">Loading BUIDCO...</p>
         </div>
       </div>
     );
@@ -45,16 +43,15 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
     <SidebarProvider defaultOpen>
       <Sidebar className="bg-card border-r" collapsible="icon">
-        {/* SidebarHeader is part of Sidebar in the new version. */}
         <div className="p-4 flex items-center gap-2 border-b">
-            <Image 
-              src="https://placehold.co/32x32.png" 
-              alt="CLMS BUIDCO Logo" 
-              width={32} 
-              height={32}
-              data-ai-hint="logo buidco" 
-            />
-            <h1 className="text-xl font-semibold text-primary group-data-[collapsible=icon]:hidden">CLMS BUIDCO</h1>
+          <Image 
+            src="/ChatGPT Image Apr 29, 2025, 12_41_29 PM.png"
+            alt="BUIDCO Logo" 
+            width={32} 
+            height={32}
+            className="object-contain"
+          />
+          <h1 className="text-xl font-semibold text-primary group-data-[collapsible=icon]:hidden">BUIDCO</h1>
         </div>
         <SidebarContent>
           <SidebarMenu>
@@ -102,6 +99,22 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 </SidebarMenuItem>
               </>
             )}
+            <SidebarMenuItem>
+              <Link href="/profile" passHref legacyBehavior>
+                <SidebarMenuButton tooltip="Profile" isActive={router.pathname === '/profile'}>
+                  <UserCircle />
+                  <span>Profile</span>
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link href="/settings" passHref legacyBehavior>
+                <SidebarMenuButton tooltip="Settings" isActive={router.pathname === '/settings'}>
+                  <Settings />
+                  <span>Settings</span>
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
