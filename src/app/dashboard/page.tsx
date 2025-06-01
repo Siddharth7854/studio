@@ -26,7 +26,7 @@ export default function DashboardPage() {
               Welcome, {user?.name || 'Employee'}!
             </h1>
             <p className="text-muted-foreground">
-              Here's an overview of your leave status.
+              Here&apos;s an overview of your leave status.
             </p>
           </div>
           <Link href="/request-leave" passHref>

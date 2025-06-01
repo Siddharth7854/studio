@@ -1,11 +1,23 @@
 
 "use client";
 
-import type { LeaveRequest, Notification, User, LeaveRequestStatus } from '@/types';
+import type { LeaveRequest, Notification, LeaveRequestStatus } from '@/types';
 import React, { createContext, useState, useEffect, ReactNode, useContext, useCallback } from 'react';
-import { MOCK_LEAVE_REQUESTS, MOCK_NOTIFICATIONS, MOCK_USERS, MOCK_ADMIN_ID } from '@/lib/mock-data';
+import { MOCK_LEAVE_REQUESTS, MOCK_NOTIFICATIONS } from '@/lib/mock-data';
 import { useAuth } from '@/hooks/use-auth';
 import { format, differenceInDays } from 'date-fns';
+
+// Types for raw data from localStorage before date parsing
+type RawLeaveRequest = Omit<LeaveRequest, 'startDate' | 'endDate' | 'requestedAt' | 'updatedAt'> & {
+  startDate: string;
+  endDate: string;
+  requestedAt: string;
+  updatedAt?: string;
+};
+
+type RawNotification = Omit<Notification, 'date'> & {
+  date: string;
+};
 
 const LEAVE_REQUESTS_STORAGE_KEY = 'leavePilotLeaveRequests';
 const NOTIFICATIONS_STORAGE_KEY = 'leavePilotNotifications';
@@ -37,7 +49,7 @@ export const LeaveProvider = ({ children }: { children: ReactNode }) => {
     const storedLeaveRequests = localStorage.getItem(LEAVE_REQUESTS_STORAGE_KEY);
     if (storedLeaveRequests) {
       try {
-        const parsedRequests = JSON.parse(storedLeaveRequests).map((req: any) => ({
+        const parsedRequests = JSON.parse(storedLeaveRequests).map((req: RawLeaveRequest) => ({
           ...req,
           startDate: new Date(req.startDate),
           endDate: new Date(req.endDate),
@@ -58,7 +70,7 @@ export const LeaveProvider = ({ children }: { children: ReactNode }) => {
     const storedNotifications = localStorage.getItem(NOTIFICATIONS_STORAGE_KEY);
     if (storedNotifications) {
       try {
-        const parsedNotifications = JSON.parse(storedNotifications).map((notif: any) => ({
+        const parsedNotifications = JSON.parse(storedNotifications).map((notif: RawNotification) => ({
           ...notif,
           date: new Date(notif.date),
         }));

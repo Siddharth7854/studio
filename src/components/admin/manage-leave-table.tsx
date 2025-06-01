@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import type { LeaveRequest, LeaveRequestStatus } from '@/types';
+import type { LeaveRequest } from '@/types';
 import { useLeave } from '@/contexts/leave-context';
 import { useAuth } from '@/hooks/use-auth';
 import {
@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { format, differenceInDays } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ClipboardList, CheckCircle, XCircle, Clock, Loader2, MessageSquare } from 'lucide-react';
+import { ClipboardList, CheckCircle, XCircle, Clock, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   AlertDialog,
@@ -30,7 +30,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Label } from '@/components/ui/label';
 import { MOCK_USERS } from '@/lib/mock-data';
